@@ -1,4 +1,4 @@
-# GoFood AI
+# Gourmet Guide AI
 
 An AI-powered food recommendation app built with Flutter that suggests meals based on inferred user preferences and location.
 
