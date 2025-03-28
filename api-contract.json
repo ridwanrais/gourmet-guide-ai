@@ -555,6 +555,11 @@
             "example": 1.2,
             "description": "Distance in kilometers from the user's location"
           },
+          "aiDescription": {
+            "type": "string",
+            "example": "Spice Garden stands out for its authentic Indian flavors and generous vegetarian options. Their perfectly balanced spice levels cater to both spice enthusiasts and those who prefer milder tastes. The restaurant's warm ambiance and attentive service make it ideal for both casual dining and special occasions.",
+            "description": "AI-generated description explaining why this restaurant is a good choice based on user preferences"
+          },
           "popularItems": {
             "type": "array",
             "items": {
@@ -782,17 +787,22 @@
       "ErrorResponse": {
         "type": "object",
         "properties": {
-          "code": {
-            "type": "integer",
-            "example": 400
-          },
-          "message": {
-            "type": "string",
-            "example": "Invalid request parameters"
-          },
-          "details": {
-            "type": "string",
-            "example": "The location parameter is required"
+          "error": {
+            "type": "object",
+            "properties": {
+              "message": {
+                "type": "string",
+                "example": "The requested resource was not found."
+              },
+              "details": {
+                "type": "string",
+                "example": "User not found."
+              },
+              "code": {
+                "type": "string",
+                "example": "NF_01"
+              }
+            }
           }
         }
       }

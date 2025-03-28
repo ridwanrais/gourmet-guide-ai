@@ -12,6 +12,7 @@ class MockDataProvider {
         cuisineTypes: ['Indian', 'Spicy', 'Vegetarian'],
         address: '123 Spice Lane, Jakarta',
         distance: 1.2,
+        aiDescription: 'Spice Garden stands out for its authentic Indian flavors and generous vegetarian options. Their perfectly balanced spice levels cater to both spice enthusiasts and those who prefer milder tastes. The restaurant\'s warm ambiance and attentive service make it ideal for both casual dining and special occasions.',
         popularItems: [
           FoodItem(
             id: '101',
@@ -40,6 +41,7 @@ class MockDataProvider {
         cuisineTypes: ['American', 'Fast Food', 'Burgers'],
         address: '456 Burger Street, Jakarta',
         distance: 0.8,
+        aiDescription: 'Burger Haven is perfect for those seeking a quick, satisfying meal without breaking the bank. Their burgers feature locally-sourced beef and freshly baked buns. Being just 0.8 km away makes it an excellent choice when you\'re hungry and don\'t want to travel far. Their efficient service ensures you\'ll be enjoying your meal in minutes.',
         popularItems: [
           FoodItem(
             id: '201',
@@ -68,6 +70,7 @@ class MockDataProvider {
         cuisineTypes: ['Japanese', 'Sushi', 'Seafood'],
         address: '789 Ocean Drive, Jakarta',
         distance: 2.5,
+        aiDescription: 'With the highest rating in the area (4.8), Sushi World offers an exceptional dining experience for sushi enthusiasts. Their fish is delivered fresh daily, and their skilled chefs have trained in Japan. The premium price point reflects the quality of ingredients and craftsmanship that goes into each dish. Perfect for special occasions or when you\'re craving authentic Japanese cuisine.',
         popularItems: [
           FoodItem(
             id: '301',
@@ -96,6 +99,7 @@ class MockDataProvider {
         cuisineTypes: ['Vegan', 'Healthy', 'Salads'],
         address: '321 Veggie Avenue, Jakarta',
         distance: 1.7,
+        aiDescription: 'Green Plate is the perfect choice for health-conscious diners. Their menu features locally-sourced organic ingredients transformed into creative, nutrient-dense dishes that don\'t sacrifice flavor. The moderate price point offers excellent value considering the quality of ingredients. Their commitment to sustainability extends to eco-friendly packaging and a low-waste kitchen.',
         popularItems: [
           FoodItem(
             id: '401',
@@ -124,6 +128,7 @@ class MockDataProvider {
         cuisineTypes: ['Chinese', 'Noodles', 'Soup'],
         address: '567 Noodle Lane, Jakarta',
         distance: 1.1,
+        aiDescription: 'Noodle House offers exceptional value with its budget-friendly prices and generous portions. Their hand-pulled noodles are made fresh daily, giving them that perfect chewy texture. At just 1.1 km away, it\'s conveniently located for a quick, satisfying meal. Their soup broths simmer for hours, developing deep, complex flavors that warm you from the inside out.',
         popularItems: [
           FoodItem(
             id: '501',

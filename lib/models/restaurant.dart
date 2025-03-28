@@ -8,6 +8,7 @@ class Restaurant {
   final String address;
   final double distance;
   final List<FoodItem> popularItems;
+  final String aiDescription;
 
   Restaurant({
     required this.id,
@@ -19,6 +20,7 @@ class Restaurant {
     required this.address,
     required this.distance,
     required this.popularItems,
+    this.aiDescription = '',
   });
 }
 
