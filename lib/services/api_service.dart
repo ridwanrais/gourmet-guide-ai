@@ -116,10 +116,10 @@ class ApiService {
           rating: restaurantJson['rating'].toDouble(),
           priceRange: restaurantJson['priceRange'],
           cuisineTypes: List<String>.from(restaurantJson['cuisineTypes']),
-          address: restaurantJson['address'],
+          address: restaurantJson['address'] ?? '',
           distance: restaurantJson['distance'].toDouble(),
           popularItems: popularItems,
-          aiDescription: restaurantJson['aiDescription'] ?? '',
+          aiDescription: restaurantJson['aiDescription'],
         );
       }).toList();
     } else {

@@ -151,7 +151,7 @@ class RestaurantCard extends StatelessWidget {
                     const SizedBox(width: 4),
                     Expanded(
                       child: Text(
-                        restaurant.address,
+                        restaurant.address ?? '',
                         style: const TextStyle(
                           color: Colors.grey,
                           fontSize: 14,
@@ -163,7 +163,7 @@ class RestaurantCard extends StatelessWidget {
                 const SizedBox(height: 16),
                 
                 // AI Description
-                if (restaurant.aiDescription.isNotEmpty) ...[
+                if (restaurant.aiDescription != null && restaurant.aiDescription!.isNotEmpty) ...[
                   Container(
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
@@ -197,7 +197,7 @@ class RestaurantCard extends StatelessWidget {
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          restaurant.aiDescription,
+                          restaurant.aiDescription!,
                           style: TextStyle(
                             fontSize: 13,
                             height: 1.4,
@@ -284,7 +284,7 @@ class RestaurantCard extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 4),
                                 Text(
-                                  item.description,
+                                  item.description ?? '',
                                   style: TextStyle(
                                     color: Colors.grey[600],
                                     fontSize: 14,
