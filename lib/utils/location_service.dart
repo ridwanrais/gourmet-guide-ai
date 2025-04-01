@@ -1,5 +1,6 @@
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:gofood_ai/services/api_service.dart';
 
 class LocationService {
   // Get current location
@@ -50,10 +51,27 @@ class LocationService {
     return status.isGranted;
   }
 
-  // Get formatted address from coordinates (mock implementation)
+  // Get formatted address from coordinates using API
   static Future<String> getAddressFromCoordinates(double latitude, double longitude) async {
-    // In a real app, this would use a geocoding service
-    // For mock purposes, we'll return a hardcoded address
-    return "Jakarta, Indonesia";
+    try {
+      final result = await ApiService.reverseGeocode(latitude, longitude);
+      return result['formattedAddress'] ?? "Unknown location";
+    } catch (e) {
+      // Fallback to default value if API call fails
+      return "Jakarta, Indonesia";
+    }
+  }
+  
+  // Get coordinates from address using API
+  static Future<Map<String, double>?> getCoordinatesFromAddress(String address) async {
+    try {
+      final result = await ApiService.geocodeAddress(address);
+      return {
+        'latitude': result['latitude'],
+        'longitude': result['longitude'],
+      };
+    } catch (e) {
+      return null;
+    }
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:gofood_ai/models/mock_data.dart';
+import 'package:gofood_ai/services/api_service.dart';
 import 'package:gofood_ai/screens/results_screen.dart';
 import 'package:gofood_ai/utils/theme.dart';
 import 'package:provider/provider.dart';
@@ -19,7 +19,9 @@ class _PreferenceScreenState extends State<PreferenceScreen> {
   final TextEditingController _preferenceController = TextEditingController();
   final FocusNode _focusNode = FocusNode();
   bool _isProcessing = false;
-  final List<String> _suggestions = MockDataProvider.getSuggestions();
+  bool _isLoadingSuggestions = true;
+  List<String> _suggestions = [];
+  String? _errorMessage;
 
   @override
   void initState() {
@@ -28,6 +30,37 @@ class _PreferenceScreenState extends State<PreferenceScreen> {
     Future.delayed(const Duration(milliseconds: 500), () {
       _focusNode.requestFocus();
     });
+    _loadSuggestions();
+  }
+  
+  Future<void> _loadSuggestions() async {
+    setState(() {
+      _isLoadingSuggestions = true;
+      _errorMessage = null;
+    });
+    
+    try {
+      final suggestions = await ApiService.getFoodPreferenceSuggestions();
+      setState(() {
+        _suggestions = suggestions;
+        _isLoadingSuggestions = false;
+      });
+    } catch (e) {
+      setState(() {
+        // Fallback to default suggestions if API call fails
+        _suggestions = [
+          "I feel like eating something spicy and cheap",
+          "Recommend a healthy lunch option",
+          "What's a good vegetarian restaurant nearby?",
+          "I want something quick and filling",
+          "Show me the best-rated restaurants",
+          "I'm in the mood for Asian food",
+          "Surprise me!",
+        ];
+        _errorMessage = "Couldn't load suggestions: $e";
+        _isLoadingSuggestions = false;
+      });
+    }
   }
 
   void _processPreference() {
@@ -40,23 +73,18 @@ class _PreferenceScreenState extends State<PreferenceScreen> {
       _isProcessing = true;
     });
 
-    // Simulate AI processing with a delay
-    Future.delayed(const Duration(seconds: 2), () {
-      if (mounted) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => ResultsScreen(
-              location: widget.location,
-              preference: _preferenceController.text,
-            ),
-          ),
-        ).then((_) {
-          setState(() {
-            _isProcessing = false;
-          });
-        });
-      }
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ResultsScreen(
+          location: widget.location,
+          preference: _preferenceController.text,
+        ),
+      ),
+    ).then((_) {
+      setState(() {
+        _isProcessing = false;
+      });
     });
   }
 
@@ -146,22 +174,33 @@ class _PreferenceScreenState extends State<PreferenceScreen> {
               ).animate().fadeIn(duration: 500.ms, delay: 600.ms),
               const SizedBox(height: 16),
               Expanded(
-                child: ListView.builder(
-                  itemCount: _suggestions.length,
-                  itemBuilder: (context, index) {
-                    return Card(
-                      margin: const EdgeInsets.only(bottom: 12),
-                      child: ListTile(
-                        title: Text(_suggestions[index]),
-                        trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-                        onTap: () => _selectSuggestion(_suggestions[index]),
-                      ),
-                    ).animate().fadeIn(
-                          duration: 500.ms,
-                          delay: Duration(milliseconds: 700 + (index * 100)),
-                        );
-                  },
-                ),
+                child: _isLoadingSuggestions
+                    ? const Center(child: CircularProgressIndicator())
+                    : _errorMessage != null
+                        ? Center(
+                            child: Text(
+                              _errorMessage!,
+                              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                    color: Theme.of(context).textTheme.bodyLarge?.color?.withOpacity(0.7),
+                                  ),
+                            ),
+                          )
+                        : ListView.builder(
+                            itemCount: _suggestions.length,
+                            itemBuilder: (context, index) {
+                              return Card(
+                                margin: const EdgeInsets.only(bottom: 12),
+                                child: ListTile(
+                                  title: Text(_suggestions[index]),
+                                  trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                                  onTap: () => _selectSuggestion(_suggestions[index]),
+                                ),
+                              ).animate().fadeIn(
+                                    duration: 500.ms,
+                                    delay: Duration(milliseconds: 700 + (index * 100)),
+                                  );
+                            },
+                          ),
               ),
               const SizedBox(height: 16),
               if (!_isProcessing)

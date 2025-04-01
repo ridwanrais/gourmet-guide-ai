@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:gofood_ai/models/mock_data.dart';
 import 'package:gofood_ai/models/restaurant.dart';
+import 'package:gofood_ai/services/api_service.dart';
+import 'package:gofood_ai/utils/location_service.dart';
 import 'package:gofood_ai/widgets/restaurant_card.dart';
 import 'package:gofood_ai/utils/theme.dart';
 import 'package:provider/provider.dart';
@@ -26,6 +27,7 @@ class _ResultsScreenState extends State<ResultsScreen> {
   bool _isLoading = true;
   int _currentIndex = 0;
   bool _showingMore = false;
+  String? _errorMessage;
 
   @override
   void initState() {
@@ -34,16 +36,36 @@ class _ResultsScreenState extends State<ResultsScreen> {
   }
 
   Future<void> _loadRecommendations() async {
-    // Simulate network delay
-    await Future.delayed(const Duration(seconds: 1));
-    
     setState(() {
-      _recommendations = MockDataProvider.getRecommendations(
-        widget.preference,
-        widget.location,
-      );
-      _isLoading = false;
+      _isLoading = true;
+      _errorMessage = null;
     });
+    
+    try {
+      // Try to get coordinates from the location string
+      Map<String, double>? coordinates;
+      if (widget.location.isNotEmpty) {
+        coordinates = await LocationService.getCoordinatesFromAddress(widget.location);
+      }
+      
+      // Call the API to get recommendations
+      final recommendations = await ApiService.getRestaurantRecommendations(
+        prompt: widget.preference,
+        latitude: coordinates?['latitude'],
+        longitude: coordinates?['longitude'],
+      );
+      
+      setState(() {
+        _recommendations = recommendations;
+        _isLoading = false;
+      });
+    } catch (e) {
+      setState(() {
+        _recommendations = [];
+        _errorMessage = "Couldn't load recommendations: $e";
+        _isLoading = false;
+      });
+    }
   }
 
   void _showNextRecommendation() {
@@ -90,10 +112,47 @@ class _ResultsScreenState extends State<ResultsScreen> {
       ),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
-          : _recommendations.isEmpty
-              ? _buildEmptyState()
-              : _buildResults(),
+          : _errorMessage != null
+              ? _buildErrorState()
+              : _recommendations.isEmpty
+                  ? _buildEmptyState()
+                  : _buildResults(),
     );
+  }
+
+  Widget _buildErrorState() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            Icons.error_outline,
+            size: 80,
+            color: Theme.of(context).colorScheme.error.withOpacity(0.7),
+          ),
+          const SizedBox(height: 16),
+          Text(
+            'Oops! Something went wrong',
+            style: Theme.of(context).textTheme.headlineSmall,
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 8),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 32.0),
+            child: Text(
+              _errorMessage ?? 'Unable to load recommendations',
+              style: Theme.of(context).textTheme.bodyLarge,
+              textAlign: TextAlign.center,
+            ),
+          ),
+          const SizedBox(height: 24),
+          ElevatedButton(
+            onPressed: _loadRecommendations,
+            child: const Text('Try Again'),
+          ),
+        ],
+      ),
+    ).animate().fadeIn(duration: 500.ms);
   }
 
   Widget _buildEmptyState() {

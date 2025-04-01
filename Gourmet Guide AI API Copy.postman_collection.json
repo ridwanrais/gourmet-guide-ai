@@ -1,0 +1,602 @@
+{
+	"info": {
+		"_postman_id": "db86d820-c0e1-4244-9f10-51f81d369838",
+		"name": "Gourmet Guide AI API Copy",
+		"description": "API for the Gourmet Guide AI food recommendation service\n\nContact Support:\n Name: API Support\n Email: support@gourmetguide.ai",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25498656",
+		"_collection_link": "https://winter-escape-347998.postman.co/workspace/Onelink-Alternative~a5929194-001a-4496-b9d5-228cd267822d/collection/25498656-db86d820-c0e1-4244-9f10-51f81d369838?action=share&source=collection_link&creator=25498656"
+	},
+	"item": [
+		{
+			"name": "location",
+			"item": [
+				{
+					"name": "geocode",
+					"item": [
+						{
+							"name": "Convert address to coordinates",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"address\": \"jakarta\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/location/geocode",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"location",
+										"geocode"
+									]
+								},
+								"description": "Convert a text address to geographic coordinates"
+							},
+							"response": [
+								{
+									"name": "Successful operation",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"address\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/location/geocode",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"location",
+												"geocode"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"latitude\": \"<double>\",\n  \"longitude\": \"<double>\",\n  \"formattedAddress\": \"<string>\"\n}"
+								},
+								{
+									"name": "Invalid address supplied",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"address\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/location/geocode",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"location",
+												"geocode"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"details\": \"<string>\",\n    \"code\": \"<string>\"\n  }\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "reverse-geocode",
+					"item": [
+						{
+							"name": "Convert coordinates to address",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"latitude\": -6.1754049,\n  \"longitude\": 106.827168\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/location/reverse-geocode",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"location",
+										"reverse-geocode"
+									]
+								},
+								"description": "Convert geographic coordinates to a text address"
+							},
+							"response": [
+								{
+									"name": "Successful operation",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"latitude\": \"<double>\",\n  \"longitude\": \"<double>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/location/reverse-geocode",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"location",
+												"reverse-geocode"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"address\": \"<string>\",\n  \"city\": \"<string>\",\n  \"country\": \"<string>\"\n}"
+								},
+								{
+									"name": "Invalid coordinates supplied",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"latitude\": \"<double>\",\n  \"longitude\": \"<double>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/location/reverse-geocode",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"location",
+												"reverse-geocode"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"details\": \"<string>\",\n    \"code\": \"<string>\"\n  }\n}"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "preferences",
+			"item": [
+				{
+					"name": "suggestions",
+					"item": [
+						{
+							"name": "Get food preference suggestions",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/preferences/suggestions?count=5",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"preferences",
+										"suggestions"
+									],
+									"query": [
+										{
+											"key": "count",
+											"value": "5",
+											"description": "Number of suggestions to return"
+										}
+									]
+								},
+								"description": "Get a list of suggested food preferences for the user"
+							},
+							"response": [
+								{
+									"name": "Successful operation",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/preferences/suggestions?count=5",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"preferences",
+												"suggestions"
+											],
+											"query": [
+												{
+													"key": "count",
+													"value": "5",
+													"description": "Number of suggestions to return"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"suggestions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "restaurants",
+			"item": [
+				{
+					"name": "recommendations",
+					"item": [
+						{
+							"name": "Get restaurant recommendations (MVP)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"coordinates\": {\n        \"latitude\": -6.1754049,\n        \"longitude\": 106.827168\n    },\n    \"prompt\": \"give me something unconventional!\" // \"Find me a place to eat! I'm looking for [cuisine/type of food]. Preferably something [cheap/mid-range/fancy], and I'd love [specific preferences, e.g., outdoor seating, vegetarian options, late-night availability]\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/restaurants/recommendations",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"restaurants",
+										"recommendations"
+									]
+								},
+								"description": "Get personalized restaurant recommendations based on location and preferences"
+							},
+							"response": [
+								{
+									"name": "Successful operation",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"location\": \"<string>\",\n  \"preference\": \"<string>\",\n  \"coordinates\": {\n    \"latitude\": \"<double>\",\n    \"longitude\": \"<double>\"\n  },\n  \"radius\": \"<double>\",\n  \"limit\": \"<integer>\",\n  \"userId\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/restaurants/recommendations",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"restaurants",
+												"recommendations"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"restaurants\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"rating\": \"<float>\",\n      \"priceRange\": \"<string>\",\n      \"cuisineTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"address\": \"<string>\",\n      \"coordinates\": {\n        \"latitude\": \"<double>\",\n        \"longitude\": \"<double>\"\n      },\n      \"distance\": \"<float>\",\n      \"aiDescription\": \"<string>\",\n      \"popularItems\": [\n        {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"price\": \"<float>\",\n          \"description\": \"<string>\",\n          \"tags\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"imageUrl\": \"<uri>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"price\": \"<float>\",\n          \"description\": \"<string>\",\n          \"tags\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"imageUrl\": \"<uri>\"\n        }\n      ],\n      \"openNow\": \"<boolean>\",\n      \"hours\": {\n        \"monday\": \"<string>\",\n        \"tuesday\": \"<string>\",\n        \"wednesday\": \"<string>\",\n        \"thursday\": \"<string>\",\n        \"friday\": \"<string>\",\n        \"saturday\": \"<string>\",\n        \"sunday\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"rating\": \"<float>\",\n      \"priceRange\": \"<string>\",\n      \"cuisineTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"address\": \"<string>\",\n      \"coordinates\": {\n        \"latitude\": \"<double>\",\n        \"longitude\": \"<double>\"\n      },\n      \"distance\": \"<float>\",\n      \"aiDescription\": \"<string>\",\n      \"popularItems\": [\n        {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"price\": \"<float>\",\n          \"description\": \"<string>\",\n          \"tags\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"imageUrl\": \"<uri>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"price\": \"<float>\",\n          \"description\": \"<string>\",\n          \"tags\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"imageUrl\": \"<uri>\"\n        }\n      ],\n      \"openNow\": \"<boolean>\",\n      \"hours\": {\n        \"monday\": \"<string>\",\n        \"tuesday\": \"<string>\",\n        \"wednesday\": \"<string>\",\n        \"thursday\": \"<string>\",\n        \"friday\": \"<string>\",\n        \"saturday\": \"<string>\",\n        \"sunday\": \"<string>\"\n      }\n    }\n  ],\n  \"matchScore\": \"<float>\"\n}"
+								},
+								{
+									"name": "Invalid request parameters",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"location\": \"<string>\",\n  \"preference\": \"<string>\",\n  \"coordinates\": {\n    \"latitude\": \"<double>\",\n    \"longitude\": \"<double>\"\n  },\n  \"radius\": \"<double>\",\n  \"limit\": \"<integer>\",\n  \"userId\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/restaurants/recommendations",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"restaurants",
+												"recommendations"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"details\": \"<string>\",\n    \"code\": \"<string>\"\n  }\n}"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Gofood API - find restaurants",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://gofood.co.id/_next/data/16.0.0/en/bali/kuta-utara-restaurants/near_me.json?service_area=bali",
+					"protocol": "https",
+					"host": [
+						"gofood",
+						"co",
+						"id"
+					],
+					"path": [
+						"_next",
+						"data",
+						"16.0.0",
+						"en",
+						"bali",
+						"kuta-utara-restaurants",
+						"near_me.json"
+					],
+					"query": [
+						{
+							"key": "service_area",
+							"value": "bali"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Gofood API - find restaurants",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://gofood.co.id/_next/data/16.0.0/en/bali/kuta-utara-restaurants/near_me.json?service_area=bali",
+							"protocol": "https",
+							"host": [
+								"gofood",
+								"co",
+								"id"
+							],
+							"path": [
+								"_next",
+								"data",
+								"16.0.0",
+								"en",
+								"bali",
+								"kuta-utara-restaurants",
+								"near_me.json"
+							],
+							"query": [
+								{
+									"key": "service_area",
+									"value": "bali"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"pageProps\": {\n        \"tenant\": {\n            \"uid\": \"gofood\",\n            \"countryCode\": \"ID\",\n            \"currencyCode\": \"IDR\",\n            \"features\": {\n                \"loginEnable\": true,\n                \"useMiniFooter\": false,\n                \"showPopularLocations\": true,\n                \"showLanguagesPicker\": true,\n                \"showMiniFooterText\": false,\n                \"downloadAppsEnable\": true,\n                \"sidenavOngoingOrdersEnable\": false,\n                \"helpTicketEnable\": true,\n                \"showInstagramLink\": true,\n                \"showSearchNav\": true,\n                \"displayPasPage\": true\n            }\n        },\n        \"activitySource\": \"gofood\",\n        \"auth\": {\n            \"isAuth\": false,\n            \"user\": null,\n            \"isOrderPrevented\": false\n        },\n        \"userAgent\": \"PostmanRuntime/7.43.3\",\n        \"userLocation\": {\n            \"ipLocation\": {\n                \"city\": null,\n                \"geolocation\": null\n            },\n            \"chosenLocation\": {\n                \"locality\": \"kuta-utara\",\n                \"name\": \"Kuta Utara, Bali\",\n                \"serviceArea\": \"bali\",\n                \"serviceAreaId\": \"3\",\n                \"latitude\": -8.6488988,\n                \"longitude\": 115.1592718,\n                \"category\": \"near_me\",\n                \"timezone\": \"Asia/Makassar\",\n                \"found\": true\n            }\n        },\n        \"pathLocation\": {\n            \"locality\": \"kuta-utara\",\n            \"name\": \"Kuta Utara, Bali\",\n            \"serviceArea\": \"bali\",\n            \"serviceAreaId\": \"3\",\n            \"latitude\": -8.6488988,\n            \"longitude\": 115.1592718,\n            \"category\": \"near_me\",\n            \"timezone\": \"Asia/Makassar\",\n            \"found\": true\n        },\n        \"breadcrumbs\": [\n            {\n                \"name\": \"Bali\",\n                \"href\": \"/en/bali/restaurants\"\n            },\n            {\n                \"name\": \"Kuta Utara\",\n                \"href\": \"/en/bali/kuta-utara-restaurants\"\n            },\n            {\n                \"name\": \"Near me\",\n                \"href\": \"/en/bali/kuta-utara-restaurants/near_me\"\n            }\n        ],\n        \"banner\": {\n            \"icon\": \"\",\n            \"image\": \"https://i.gojekapi.com/darkroom/gofood-id/v2/images/uploads/5d194f5f-13e7-4112-8295-3828433f1c46_near-me.png\",\n            \"imageTablet\": \"https://i.gojekapi.com/darkroom/gofood-id/v2/images/uploads/050b7ef3-c51a-4847-b7bd-65da7128f3b0_near-me.png\",\n            \"title\": \"Near me\"\n        },\n        \"outlets\": [\n            {\n                \"key\": \"tenants/gofood/outlets/5960842c-7f42-4ea3-af4c-9ca72eea4e65\",\n                \"tenantUid\": \"gofood\",\n                \"uid\": \"5960842c-7f42-4ea3-af4c-9ca72eea4e65\",\n                \"core\": {\n                    \"key\": \"tenants/gofood/outlets/5960842c-7f42-4ea3-af4c-9ca72eea4e65\",\n                    \"tenantUid\": \"gofood\",\n                    \"uid\": \"5960842c-7f42-4ea3-af4c-9ca72eea4e65\",\n                    \"displayName\": \"KEBAB JUMBO JABAL NUR, Riyadh\",\n                    \"description\": \"\",\n                    \"highlights\": [],\n                    \"location\": {\n                        \"latitude\": -8.6436031,\n                        \"longitude\": 115.1759798\n                    },\n                    \"countryCode\": \"ID\",\n                    \"timeZone\": \"Asia/Makassar\",\n                    \"serviceArea\": {\n                        \"id\": 3,\n                        \"name\": \"\",\n                        \"zoneId\": 0,\n                        \"zoneName\": \"\"\n                    },\n                    \"status\": 1,\n                    \"openPeriods\": [\n                        {\n                            \"day\": 1,\n                            \"startTime\": {\n                                \"hours\": 0,\n                                \"minutes\": 0,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            },\n                            \"endTime\": {\n                                \"hours\": 23,\n                                \"minutes\": 59,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            }\n                        },\n                        {\n                            \"day\": 2,\n                            \"startTime\": {\n                                \"hours\": 0,\n                                \"minutes\": 0,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            },\n                            \"endTime\": {\n                                \"hours\": 23,\n                                \"minutes\": 59,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            }\n                        },\n                        {\n                            \"day\": 3,\n                            \"startTime\": {\n                                \"hours\": 0,\n                                \"minutes\": 0,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            },\n                            \"endTime\": {\n                                \"hours\": 23,\n                                \"minutes\": 59,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            }\n                        },\n                        {\n                            \"day\": 4,\n                            \"startTime\": {\n                                \"hours\": 0,\n                                \"minutes\": 0,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            },\n                            \"endTime\": {\n                                \"hours\": 23,\n                                \"minutes\": 59,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            }\n                        },\n                        {\n                            \"day\": 5,\n                            \"startTime\": {\n                                \"hours\": 0,\n                                \"minutes\": 0,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            },\n                            \"endTime\": {\n                                \"hours\": 23,\n                                \"minutes\": 59,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            }\n                        },\n                        {\n                            \"day\": 6,\n                            \"startTime\": {\n                                \"hours\": 0,\n                                \"minutes\": 0,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            },\n                            \"endTime\": {\n                                \"hours\": 23,\n                                \"minutes\": 59,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            }\n                        },\n                        {\n                            \"day\": 7,\n                            \"startTime\": {\n                                \"hours\": 0,\n                                \"minutes\": 0,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            },\n                            \"endTime\": {\n                                \"hours\": 23,\n                                \"minutes\": 59,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            }\n                        }\n                    ],\n                    \"createTime\": \"2017-05-23T08:23:11.956Z\",\n                    \"brandUid\": \"fa6af11f-8086-47f6-9256-11cc7e0830ff\",\n                    \"idempotencyKey\": \"\",\n                    \"badges\": [],\n                    \"notes\": \"\",\n                    \"blockedReason\": \"\",\n                    \"shortLink\": \"https://gofood.link/u/gVjg\",\n                    \"brand\": {\n                        \"key\": \"tenants/gofood/brands/fa6af11f-8086-47f6-9256-11cc7e0830ff\",\n                        \"tenantUid\": \"gofood\",\n                        \"uid\": \"fa6af11f-8086-47f6-9256-11cc7e0830ff\",\n                        \"displayName\": \"@Williamsuri\",\n                        \"description\": \"\",\n                        \"idempotencyKey\": \"\"\n                    },\n                    \"tags\": [\n                        {\n                            \"key\": \"tenants/gofood/tags/CUISINE_MIDDLE_EASTERN\",\n                            \"tenantUid\": \"gofood\",\n                            \"uid\": \"CUISINE_MIDDLE_EASTERN\",\n                            \"displayName\": \"Middle Eastern\",\n                            \"description\": \"\",\n                            \"taxonomy\": 2,\n                            \"parentKey\": \"\"\n                        },\n                        {\n                            \"key\": \"tenants/gofood/tags/CUISINE_INDIAN_FOOD\",\n                            \"tenantUid\": \"gofood\",\n                            \"uid\": \"CUISINE_INDIAN_FOOD\",\n                            \"displayName\": \"Indian\",\n                            \"description\": \"\",\n                            \"taxonomy\": 2,\n                            \"parentKey\": \"\"\n                        },\n                        {\n                            \"key\": \"tenants/gofood/tags/CUISINE_BURGER_SANDWICH_STEAK\",\n                            \"tenantUid\": \"gofood\",\n                            \"uid\": \"CUISINE_BURGER_SANDWICH_STEAK\",\n                            \"displayName\": \"Western\",\n                            \"description\": \"\",\n                            \"taxonomy\": 2,\n                            \"parentKey\": \"\"\n                        }\n                    ]\n                },\n                \"delivery\": {\n                    \"enabled\": false,\n                    \"maxRadiusKm\": 0,\n                    \"maxRouteKm\": 0,\n                    \"maxItems\": 0,\n                    \"eta\": {\n                        \"seconds\": 1380,\n                        \"nanos\": 0\n                    },\n                    \"distanceKm\": 1.94,\n                    \"deliverable\": false,\n                    \"handlingAndDeliveryFee\": 0\n                },\n                \"pickup\": {\n                    \"enabled\": false\n                },\n                \"ratings\": {\n                    \"average\": 2.9,\n                    \"total\": 0\n                },\n                \"maf\": {\n                    \"enabled\": true,\n                    \"autoAcceptEnabled\": false\n                },\n                \"media\": {\n                    \"logoImgUrl\": \"\",\n                    \"coverImgUrl\": \"https://i.gojekapi.com/darkroom/gofood-indonesia/v2/images/uploads/92d749cd-a435-467e-a079-d27afc06506f_Go-Biz_20220915_135225.jpeg\"\n                },\n                \"view\": 0,\n                \"priceLevel\": 2,\n                \"brandOutletsGrouped\": false,\n                \"offers\": [],\n                \"cannedReviews\": [],\n                \"offeringToken\": \"\",\n                \"path\": \"/en/bali/restaurant/kebab-jumbo-jabal-nur-riyadh-5960842c-7f42-4ea3-af4c-9ca72eea4e65\"\n            },\n            {\n                \"key\": \"tenants/gofood/outlets/40570c50-d593-4149-864d-95e0f1c8b2f1\",\n                \"tenantUid\": \"gofood\",\n                \"uid\": \"40570c50-d593-4149-864d-95e0f1c8b2f1\",\n                \"core\": {\n                    \"key\": \"tenants/gofood/outlets/40570c50-d593-4149-864d-95e0f1c8b2f1\",\n                    \"tenantUid\": \"gofood\",\n                    \"uid\": \"40570c50-d593-4149-864d-95e0f1c8b2f1\",\n                    \"displayName\": \"Johnny Rockets Burgers, Seminyak\",\n                    \"description\": \"\",\n                    \"highlights\": [],\n                    \"location\": {\n                        \"latitude\": -8.6835389,\n                        \"longitude\": 115.163179415\n                    },\n                    \"countryCode\": \"ID\",\n                    \"timeZone\": \"Asia/Makassar\",\n                    \"serviceArea\": {\n                        \"id\": 3,\n                        \"name\": \"\",\n                        \"zoneId\": 0,\n                        \"zoneName\": \"\"\n                    },\n                    \"status\": 1,\n                    \"openPeriods\": [\n                        {\n                            \"day\": 2,\n                            \"startTime\": {\n                                \"hours\": 0,\n                                \"minutes\": 0,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            },\n                            \"endTime\": {\n                                \"hours\": 1,\n                                \"minutes\": 45,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            }\n                        },\n                        {\n                            \"day\": 2,\n                            \"startTime\": {\n                                \"hours\": 11,\n                                \"minutes\": 0,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            },\n                            \"endTime\": {\n                                \"hours\": 23,\n                                \"minutes\": 59,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            }\n                        },\n                        {\n                            \"day\": 3,\n                            \"startTime\": {\n                                \"hours\": 0,\n                                \"minutes\": 0,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            },\n                            \"endTime\": {\n                                \"hours\": 1,\n                                \"minutes\": 45,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            }\n                        },\n                        {\n                            \"day\": 3,\n                            \"startTime\": {\n                                \"hours\": 11,\n                                \"minutes\": 0,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            },\n                            \"endTime\": {\n                                \"hours\": 23,\n                                \"minutes\": 59,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            }\n                        },\n                        {\n                            \"day\": 4,\n                            \"startTime\": {\n                                \"hours\": 0,\n                                \"minutes\": 0,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            },\n                            \"endTime\": {\n                                \"hours\": 1,\n                                \"minutes\": 45,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            }\n                        },\n                        {\n                            \"day\": 4,\n                            \"startTime\": {\n                                \"hours\": 11,\n                                \"minutes\": 0,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            },\n                            \"endTime\": {\n                                \"hours\": 23,\n                                \"minutes\": 59,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            }\n                        },\n                        {\n                            \"day\": 5,\n                            \"startTime\": {\n                                \"hours\": 0,\n                                \"minutes\": 0,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            },\n                            \"endTime\": {\n                                \"hours\": 1,\n                                \"minutes\": 45,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            }\n                        },\n                        {\n                            \"day\": 5,\n                            \"startTime\": {\n                                \"hours\": 11,\n                                \"minutes\": 0,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            },\n                            \"endTime\": {\n                                \"hours\": 23,\n                                \"minutes\": 59,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            }\n                        },\n                        {\n                            \"day\": 6,\n                            \"startTime\": {\n                                \"hours\": 0,\n                                \"minutes\": 0,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            },\n                            \"endTime\": {\n                                \"hours\": 2,\n                                \"minutes\": 45,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            }\n                        },\n                        {\n                            \"day\": 6,\n                            \"startTime\": {\n                                \"hours\": 11,\n                                \"minutes\": 0,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            },\n                            \"endTime\": {\n                                \"hours\": 23,\n                                \"minutes\": 59,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            }\n                        },\n                        {\n                            \"day\": 7,\n                            \"startTime\": {\n                                \"hours\": 0,\n                                \"minutes\": 0,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            },\n                            \"endTime\": {\n                                \"hours\": 2,\n                                \"minutes\": 45,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            }\n                        },\n                        {\n                            \"day\": 7,\n                            \"startTime\": {\n                                \"hours\": 11,\n                                \"minutes\": 0,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            },\n                            \"endTime\": {\n                                \"hours\": 23,\n                                \"minutes\": 59,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            }\n                        },\n                        {\n                            \"day\": 1,\n                            \"startTime\": {\n                                \"hours\": 0,\n                                \"minutes\": 0,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            },\n                            \"endTime\": {\n                                \"hours\": 1,\n                                \"minutes\": 45,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            }\n                        },\n                        {\n                            \"day\": 1,\n                            \"startTime\": {\n                                \"hours\": 11,\n                                \"minutes\": 0,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            },\n                            \"endTime\": {\n                                \"hours\": 23,\n                                \"minutes\": 59,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            }\n                        }\n                    ],\n                    \"createTime\": \"2017-12-27T03:49:30.860Z\",\n                    \"brandUid\": \"985d7f53-1780-44f3-a201-d76a40b30222\",\n                    \"idempotencyKey\": \"\",\n                    \"badges\": [],\n                    \"notes\": \"\",\n                    \"blockedReason\": \"\",\n                    \"shortLink\": \"https://gofood.link/u/0n9lj\",\n                    \"nextCloseTime\": \"2025-03-29T18:45:00.000Z\",\n                    \"brand\": {\n                        \"key\": \"tenants/gofood/brands/985d7f53-1780-44f3-a201-d76a40b30222\",\n                        \"tenantUid\": \"gofood\",\n                        \"uid\": \"985d7f53-1780-44f3-a201-d76a40b30222\",\n                        \"displayName\": \"Johnny Rockets\",\n                        \"description\": \"\",\n                        \"idempotencyKey\": \"\"\n                    },\n                    \"tags\": [\n                        {\n                            \"key\": \"tenants/gofood/tags/CUISINE_BURGER_SANDWICH_STEAK\",\n                            \"tenantUid\": \"gofood\",\n                            \"uid\": \"CUISINE_BURGER_SANDWICH_STEAK\",\n                            \"displayName\": \"Western\",\n                            \"description\": \"\",\n                            \"taxonomy\": 2,\n                            \"parentKey\": \"\"\n                        },\n                        {\n                            \"key\": \"tenants/gofood/tags/CUISINE_SNACKS_JAJANAN\",\n                            \"tenantUid\": \"gofood\",\n                            \"uid\": \"CUISINE_SNACKS_JAJANAN\",\n                            \"displayName\": \"Snacks\",\n                            \"description\": \"\",\n                            \"taxonomy\": 2,\n                            \"parentKey\": \"\"\n                        },\n                        {\n                            \"key\": \"tenants/gofood/tags/CUISINE_FASTFOOD\",\n                            \"tenantUid\": \"gofood\",\n                            \"uid\": \"CUISINE_FASTFOOD\",\n                            \"displayName\": \"Fast food\",\n                            \"description\": \"\",\n                            \"taxonomy\": 2,\n                            \"parentKey\": \"\"\n                        }\n                    ]\n                },\n                \"delivery\": {\n                    \"enabled\": false,\n                    \"maxRadiusKm\": 0,\n                    \"maxRouteKm\": 0,\n                    \"maxItems\": 0,\n                    \"eta\": {\n                        \"seconds\": 2040,\n                        \"nanos\": 0\n                    },\n                    \"distanceKm\": 3.85,\n                    \"deliverable\": false,\n                    \"handlingAndDeliveryFee\": 0\n                },\n                \"pickup\": {\n                    \"enabled\": true\n                },\n                \"ratings\": {\n                    \"average\": 4.3,\n                    \"total\": 0\n                },\n                \"maf\": {\n                    \"enabled\": true,\n                    \"autoAcceptEnabled\": false\n                },\n                \"media\": {\n                    \"logoImgUrl\": \"\",\n                    \"coverImgUrl\": \"https://i.gojekapi.com/darkroom/gofood-indonesia/v2/images/uploads/bfa63f7c-529e-442c-a56b-34102dbb0ed8.jpg\"\n                },\n                \"view\": 0,\n                \"priceLevel\": 3,\n                \"brandOutletsGrouped\": false,\n                \"offers\": [],\n                \"cannedReviews\": [],\n                \"offeringToken\": \"\",\n                \"path\": \"/en/bali/restaurant/johnny-rockets-burgers-seminyak-40570c50-d593-4149-864d-95e0f1c8b2f1\"\n            },\n            {\n                \"key\": \"tenants/gofood/outlets/de42dbdd-0878-4deb-ab5c-b7bbedfa7169\",\n                \"tenantUid\": \"gofood\",\n                \"uid\": \"de42dbdd-0878-4deb-ab5c-b7bbedfa7169\",\n                \"core\": {\n                    \"key\": \"tenants/gofood/outlets/de42dbdd-0878-4deb-ab5c-b7bbedfa7169\",\n                    \"tenantUid\": \"gofood\",\n                    \"uid\": \"de42dbdd-0878-4deb-ab5c-b7bbedfa7169\",\n                    \"displayName\": \"Gofood Pondok Asri, Gang Dahlia\",\n                    \"description\": \"\",\n                    \"highlights\": [],\n                    \"location\": {\n                        \"latitude\": -8.7129099,\n                        \"longitude\": 115.174264\n                    },\n                    \"countryCode\": \"ID\",\n                    \"timeZone\": \"Asia/Makassar\",\n                    \"serviceArea\": {\n                        \"id\": 3,\n                        \"name\": \"\",\n                        \"zoneId\": 0,\n                        \"zoneName\": \"\"\n                    },\n                    \"status\": 1,\n                    \"openPeriods\": [\n                        {\n                            \"day\": 1,\n                            \"startTime\": {\n                                \"hours\": 0,\n                                \"minutes\": 0,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            },\n                            \"endTime\": {\n                                \"hours\": 23,\n                                \"minutes\": 59,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            }\n                        },\n                        {\n                            \"day\": 2,\n                            \"startTime\": {\n                                \"hours\": 0,\n                                \"minutes\": 0,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            },\n                            \"endTime\": {\n                                \"hours\": 23,\n                                \"minutes\": 59,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            }\n                        },\n                        {\n                            \"day\": 3,\n                            \"startTime\": {\n                                \"hours\": 0,\n                                \"minutes\": 0,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            },\n                            \"endTime\": {\n                                \"hours\": 23,\n                                \"minutes\": 59,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            }\n                        },\n                        {\n                            \"day\": 4,\n                            \"startTime\": {\n                                \"hours\": 0,\n                                \"minutes\": 0,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            },\n                            \"endTime\": {\n                                \"hours\": 23,\n                                \"minutes\": 59,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            }\n                        },\n                        {\n                            \"day\": 5,\n                            \"startTime\": {\n                                \"hours\": 0,\n                                \"minutes\": 0,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            },\n                            \"endTime\": {\n                                \"hours\": 23,\n                                \"minutes\": 59,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            }\n                        },\n                        {\n                            \"day\": 6,\n                            \"startTime\": {\n                                \"hours\": 0,\n                                \"minutes\": 0,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            },\n                            \"endTime\": {\n                                \"hours\": 23,\n                                \"minutes\": 59,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            }\n                        },\n                        {\n                            \"day\": 7,\n                            \"startTime\": {\n                                \"hours\": 0,\n                                \"minutes\": 0,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            },\n                            \"endTime\": {\n                                \"hours\": 23,\n                                \"minutes\": 59,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            }\n                        }\n                    ],\n                    \"createTime\": \"2021-06-28T17:36:46.782Z\",\n                    \"brandUid\": \"07f210ae-734a-457d-8d9f-38c87814c22c\",\n                    \"idempotencyKey\": \"\",\n                    \"badges\": [],\n                    \"notes\": \"\",\n                    \"blockedReason\": \"\",\n                    \"shortLink\": \"https://gofood.link/a/BiVoNUq\",\n                    \"brand\": {\n                        \"key\": \"tenants/gofood/brands/07f210ae-734a-457d-8d9f-38c87814c22c\",\n                        \"tenantUid\": \"gofood\",\n                        \"uid\": \"07f210ae-734a-457d-8d9f-38c87814c22c\",\n                        \"displayName\": \"Thrills Bar And Resto, Legian , Devani Febiyanti\",\n                        \"description\": \"\",\n                        \"idempotencyKey\": \"\"\n                    },\n                    \"tags\": [\n                        {\n                            \"key\": \"tenants/gofood/tags/CUISINE_INDIAN_FOOD\",\n                            \"tenantUid\": \"gofood\",\n                            \"uid\": \"CUISINE_INDIAN_FOOD\",\n                            \"displayName\": \"Indian\",\n                            \"description\": \"\",\n                            \"taxonomy\": 2,\n                            \"parentKey\": \"\"\n                        },\n                        {\n                            \"key\": \"tenants/gofood/tags/CUISINE_ANEKA_AYAM_BEBEK\",\n                            \"tenantUid\": \"gofood\",\n                            \"uid\": \"CUISINE_ANEKA_AYAM_BEBEK\",\n                            \"displayName\": \"Chicken & duck\",\n                            \"description\": \"\",\n                            \"taxonomy\": 2,\n                            \"parentKey\": \"\"\n                        },\n                        {\n                            \"key\": \"tenants/gofood/tags/CUISINE_MINUMAN\",\n                            \"tenantUid\": \"gofood\",\n                            \"uid\": \"CUISINE_MINUMAN\",\n                            \"displayName\": \"Beverages\",\n                            \"description\": \"\",\n                            \"taxonomy\": 2,\n                            \"parentKey\": \"\"\n                        }\n                    ]\n                },\n                \"delivery\": {\n                    \"enabled\": false,\n                    \"maxRadiusKm\": 0,\n                    \"maxRouteKm\": 0,\n                    \"maxItems\": 0,\n                    \"eta\": {\n                        \"seconds\": 3480,\n                        \"nanos\": 0\n                    },\n                    \"distanceKm\": 7.27,\n                    \"deliverable\": false,\n                    \"handlingAndDeliveryFee\": 0\n                },\n                \"pickup\": {\n                    \"enabled\": true\n                },\n                \"ratings\": {\n                    \"average\": 4.5,\n                    \"total\": 0\n                },\n                \"maf\": {\n                    \"enabled\": true,\n                    \"autoAcceptEnabled\": false\n                },\n                \"media\": {\n                    \"logoImgUrl\": \"\",\n                    \"coverImgUrl\": \"https://i.gojekapi.com/darkroom/gofood-indonesia/v2/images/uploads/09a746db-585f-4d8f-85ed-4efbba00da5e_Go-Biz_20210705_180125.jpeg\"\n                },\n                \"view\": 0,\n                \"priceLevel\": 3,\n                \"brandOutletsGrouped\": false,\n                \"offers\": [],\n                \"cannedReviews\": [],\n                \"offeringToken\": \"\",\n                \"path\": \"/en/bali/restaurant/gofood-pondok-asri-gang-dahlia-de42dbdd-0878-4deb-ab5c-b7bbedfa7169\"\n            },\n            {\n                \"key\": \"tenants/gofood/outlets/63106817-f4c2-44c4-a33e-72997b42d079\",\n                \"tenantUid\": \"gofood\",\n                \"uid\": \"63106817-f4c2-44c4-a33e-72997b42d079\",\n                \"core\": {\n                    \"key\": \"tenants/gofood/outlets/63106817-f4c2-44c4-a33e-72997b42d079\",\n                    \"tenantUid\": \"gofood\",\n                    \"uid\": \"63106817-f4c2-44c4-a33e-72997b42d079\",\n                    \"displayName\": \"Nasi Pedas Ibu Andika, Kuta\",\n                    \"description\": \"\",\n                    \"highlights\": [],\n                    \"location\": {\n                        \"latitude\": -8.7270434,\n                        \"longitude\": 115.1767775\n                    },\n                    \"countryCode\": \"ID\",\n                    \"timeZone\": \"Asia/Makassar\",\n                    \"serviceArea\": {\n                        \"id\": 3,\n                        \"name\": \"\",\n                        \"zoneId\": 0,\n                        \"zoneName\": \"\"\n                    },\n                    \"status\": 1,\n                    \"openPeriods\": [\n                        {\n                            \"day\": 1,\n                            \"startTime\": {\n                                \"hours\": 0,\n                                \"minutes\": 0,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            },\n                            \"endTime\": {\n                                \"hours\": 23,\n                                \"minutes\": 59,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            }\n                        },\n                        {\n                            \"day\": 2,\n                            \"startTime\": {\n                                \"hours\": 0,\n                                \"minutes\": 0,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            },\n                            \"endTime\": {\n                                \"hours\": 23,\n                                \"minutes\": 59,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            }\n                        },\n                        {\n                            \"day\": 3,\n                            \"startTime\": {\n                                \"hours\": 0,\n                                \"minutes\": 0,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            },\n                            \"endTime\": {\n                                \"hours\": 23,\n                                \"minutes\": 59,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            }\n                        },\n                        {\n                            \"day\": 4,\n                            \"startTime\": {\n                                \"hours\": 0,\n                                \"minutes\": 0,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            },\n                            \"endTime\": {\n                                \"hours\": 23,\n                                \"minutes\": 59,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            }\n                        },\n                        {\n                            \"day\": 5,\n                            \"startTime\": {\n                                \"hours\": 0,\n                                \"minutes\": 0,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            },\n                            \"endTime\": {\n                                \"hours\": 23,\n                                \"minutes\": 59,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            }\n                        },\n                        {\n                            \"day\": 6,\n                            \"startTime\": {\n                                \"hours\": 0,\n                                \"minutes\": 0,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            },\n                            \"endTime\": {\n                                \"hours\": 23,\n                                \"minutes\": 59,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            }\n                        },\n                        {\n                            \"day\": 7,\n                            \"startTime\": {\n                                \"hours\": 0,\n                                \"minutes\": 0,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            },\n                            \"endTime\": {\n                                \"hours\": 23,\n                                \"minutes\": 59,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            }\n                        }\n                    ],\n                    \"createTime\": \"2016-06-20T10:22:05.938Z\",\n                    \"brandUid\": \"30ff0cb4-fe4d-4458-90a1-0001c2f4122e\",\n                    \"idempotencyKey\": \"\",\n                    \"badges\": [],\n                    \"notes\": \"\",\n                    \"blockedReason\": \"\",\n                    \"shortLink\": \"https://gofood.link/u/AGqeL\",\n                    \"brand\": {\n                        \"key\": \"tenants/gofood/brands/30ff0cb4-fe4d-4458-90a1-0001c2f4122e\",\n                        \"tenantUid\": \"gofood\",\n                        \"uid\": \"30ff0cb4-fe4d-4458-90a1-0001c2f4122e\",\n                        \"displayName\": \"Nasi Pedas Ibu Andika\",\n                        \"description\": \"\",\n                        \"idempotencyKey\": \"\"\n                    },\n                    \"tags\": [\n                        {\n                            \"key\": \"tenants/gofood/tags/CUISINE_ANEKA_NASI\",\n                            \"tenantUid\": \"gofood\",\n                            \"uid\": \"CUISINE_ANEKA_NASI\",\n                            \"displayName\": \"Rice\",\n                            \"description\": \"\",\n                            \"taxonomy\": 2,\n                            \"parentKey\": \"\"\n                        }\n                    ]\n                },\n                \"delivery\": {\n                    \"enabled\": false,\n                    \"maxRadiusKm\": 0,\n                    \"maxRouteKm\": 0,\n                    \"maxItems\": 0,\n                    \"eta\": {\n                        \"seconds\": 3600,\n                        \"nanos\": 0\n                    },\n                    \"distanceKm\": 8.86,\n                    \"deliverable\": false,\n                    \"handlingAndDeliveryFee\": 0\n                },\n                \"pickup\": {\n                    \"enabled\": true\n                },\n                \"ratings\": {\n                    \"average\": 4.4,\n                    \"total\": 0\n                },\n                \"maf\": {\n                    \"enabled\": true,\n                    \"autoAcceptEnabled\": false\n                },\n                \"media\": {\n                    \"logoImgUrl\": \"\",\n                    \"coverImgUrl\": \"https://i.gojekapi.com/darkroom/gofood-indonesia/v2/images/uploads/909fce33-ae07-4419-a886-3dd71a8946f0_file20190529-5435-1v74wwn.jpeg\"\n                },\n                \"view\": 0,\n                \"priceLevel\": 3,\n                \"brandOutletsGrouped\": false,\n                \"offers\": [],\n                \"cannedReviews\": [],\n                \"offeringToken\": \"\",\n                \"path\": \"/en/bali/restaurant/nasi-pedas-ibu-andika-kuta-63106817-f4c2-44c4-a33e-72997b42d079\"\n            },\n            {\n                \"key\": \"tenants/gofood/outlets/80a1e745-b325-44a4-8065-568e4483542a\",\n                \"tenantUid\": \"gofood\",\n                \"uid\": \"80a1e745-b325-44a4-8065-568e4483542a\",\n                \"core\": {\n                    \"key\": \"tenants/gofood/outlets/80a1e745-b325-44a4-8065-568e4483542a\",\n                    \"tenantUid\": \"gofood\",\n                    \"uid\": \"80a1e745-b325-44a4-8065-568e4483542a\",\n                    \"displayName\": \"Pie Susu Bli Man, Denpasar\",\n                    \"description\": \"\",\n                    \"highlights\": [],\n                    \"location\": {\n                        \"latitude\": -8.699732558749645,\n                        \"longitude\": 115.234897993505\n                    },\n                    \"countryCode\": \"ID\",\n                    \"timeZone\": \"Asia/Makassar\",\n                    \"serviceArea\": {\n                        \"id\": 3,\n                        \"name\": \"\",\n                        \"zoneId\": 0,\n                        \"zoneName\": \"\"\n                    },\n                    \"status\": 1,\n                    \"openPeriods\": [\n                        {\n                            \"day\": 1,\n                            \"startTime\": {\n                                \"hours\": 0,\n                                \"minutes\": 0,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            },\n                            \"endTime\": {\n                                \"hours\": 23,\n                                \"minutes\": 59,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            }\n                        },\n                        {\n                            \"day\": 2,\n                            \"startTime\": {\n                                \"hours\": 0,\n                                \"minutes\": 0,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            },\n                            \"endTime\": {\n                                \"hours\": 23,\n                                \"minutes\": 59,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            }\n                        },\n                        {\n                            \"day\": 3,\n                            \"startTime\": {\n                                \"hours\": 0,\n                                \"minutes\": 0,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            },\n                            \"endTime\": {\n                                \"hours\": 23,\n                                \"minutes\": 59,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            }\n                        },\n                        {\n                            \"day\": 4,\n                            \"startTime\": {\n                                \"hours\": 0,\n                                \"minutes\": 0,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            },\n                            \"endTime\": {\n                                \"hours\": 23,\n                                \"minutes\": 59,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            }\n                        },\n                        {\n                            \"day\": 5,\n                            \"startTime\": {\n                                \"hours\": 0,\n                                \"minutes\": 0,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            },\n                            \"endTime\": {\n                                \"hours\": 23,\n                                \"minutes\": 59,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            }\n                        },\n                        {\n                            \"day\": 6,\n                            \"startTime\": {\n                                \"hours\": 0,\n                                \"minutes\": 0,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            },\n                            \"endTime\": {\n                                \"hours\": 23,\n                                \"minutes\": 59,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            }\n                        },\n                        {\n                            \"day\": 7,\n                            \"startTime\": {\n                                \"hours\": 0,\n                                \"minutes\": 0,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            },\n                            \"endTime\": {\n                                \"hours\": 23,\n                                \"minutes\": 59,\n                                \"seconds\": 0,\n                                \"nanos\": 0\n                            }\n                        }\n                    ],\n                    \"createTime\": \"2016-06-20T10:22:30.427Z\",\n                    \"brandUid\": \"03e49bc2-46a0-426e-b385-3813a480ae00\",\n                    \"idempotencyKey\": \"\",\n                    \"badges\": [],\n                    \"notes\": \"\",\n                    \"blockedReason\": \"\",\n                    \"shortLink\": \"https://gofood.link/a/yM9aZf5\",\n                    \"brand\": {\n                        \"key\": \"tenants/gofood/brands/03e49bc2-46a0-426e-b385-3813a480ae00\",\n                        \"tenantUid\": \"gofood\",\n                        \"uid\": \"03e49bc2-46a0-426e-b385-3813a480ae00\",\n                        \"displayName\": \"Pie Susu Bli Man\",\n                        \"description\": \"\",\n                        \"idempotencyKey\": \"\"\n                    },\n                    \"tags\": [\n                        {\n                            \"key\": \"tenants/gofood/tags/CUISINE_SNACKS_JAJANAN\",\n                            \"tenantUid\": \"gofood\",\n                            \"uid\": \"CUISINE_SNACKS_JAJANAN\",\n                            \"displayName\": \"Snacks\",\n                            \"description\": \"\",\n                            \"taxonomy\": 2,\n                            \"parentKey\": \"\"\n                        },\n                        {\n                            \"key\": \"tenants/gofood/tags/CUISINE_ROTI\",\n                            \"tenantUid\": \"gofood\",\n                            \"uid\": \"CUISINE_ROTI\",\n                            \"displayName\": \"Bakery\",\n                            \"description\": \"\",\n                            \"taxonomy\": 2,\n                            \"parentKey\": \"\"\n                        },\n                        {\n                            \"key\": \"tenants/gofood/tags/CUISINE_SWEETS_DESSERTS\",\n                            \"tenantUid\": \"gofood\",\n                            \"uid\": \"CUISINE_SWEETS_DESSERTS\",\n                            \"displayName\": \"Sweets\",\n                            \"description\": \"\",\n                            \"taxonomy\": 2,\n                            \"parentKey\": \"\"\n                        }\n                    ]\n                },\n                \"delivery\": {\n                    \"enabled\": false,\n                    \"maxRadiusKm\": 0,\n                    \"maxRouteKm\": 0,\n                    \"maxItems\": 0,\n                    \"eta\": {\n                        \"seconds\": 3600,\n                        \"nanos\": 0\n                    },\n                    \"distanceKm\": 10.08,\n                    \"deliverable\": false,\n                    \"handlingAndDeliveryFee\": 0\n                },\n                \"pickup\": {\n                    \"enabled\": true\n                },\n                \"ratings\": {\n                    \"average\": 4.2,\n                    \"total\": 0\n                },\n                \"maf\": {\n                    \"enabled\": true,\n                    \"autoAcceptEnabled\": false\n                },\n                \"media\": {\n                    \"logoImgUrl\": \"\",\n                    \"coverImgUrl\": \"https://i.gojekapi.com/darkroom/gofood-indonesia/v2/images/uploads/4eccb465-5172-44d0-b76b-8dc3758d78b0.jpg\"\n                },\n                \"view\": 0,\n                \"priceLevel\": 4,\n                \"brandOutletsGrouped\": false,\n                \"offers\": [],\n                \"cannedReviews\": [],\n                \"offeringToken\": \"\",\n                \"path\": \"/en/bali/restaurant/pie-susu-bli-man-denpasar-80a1e745-b325-44a4-8065-568e4483542a\"\n            }\n        ],\n        \"category\": {\n            \"id\": \"81abe00c-5bda-49c7-b80c-d3150ec9f0f9\",\n            \"code\": \"NEAR_ME\",\n            \"banner_url\": \"https://i.gojekapi.com/darkroom/gofood-id/v2/images/uploads/5d194f5f-13e7-4112-8295-3828433f1c46_near-me.png\",\n            \"banner_url_tablet\": \"https://i.gojekapi.com/darkroom/gofood-id/v2/images/uploads/050b7ef3-c51a-4847-b7bd-65da7128f3b0_near-me.png\",\n            \"type\": \"COLLECTION\",\n            \"logo_url\": \"https://i.gojekapi.com/darkroom/gofood-id/v2/images/uploads/03e6f8cf-25f2-46ed-ab93-d0d64a1ea188_gofood_categories_near_me.png\",\n            \"name\": {\n                \"en\": \"Near me\",\n                \"id\": \"Terdekat\"\n            }\n        },\n        \"fallbackOpenAppURL\": \"gojek://gofood/restaurants/list?collection=NEAR_ME&af_channel=gfproductweb&af_force_dp=true&campaign=gfmerchantlistweb&is_retargeting=true&media_source=gjkproductweb&utm_campaign=gfmerchantlistweb\",\n        \"__lang\": \"en\",\n        \"__namespaces\": {\n            \"common\": {\n                \"see_all\": \"See all\",\n                \"explore\": \"Explore\",\n                \"load_more\": \"Load more\",\n                \"more_outlets_cta\": \"More outlets\",\n                \"failed_load_more\": \"Oops, the content failed to be shown. Please reload the page.\",\n                \"failed_load_data\": \"Oops, the page failed to load. Please reload the page.\",\n                \"failed_general\": \"Uh oh, something went wrong. Try reloading this page.\",\n                \"failed_network_error\": \"Oops, we've lost connection with you. Let's try that again.\",\n                \"failed_cta\": \"Ok\",\n                \"restaurants\": \"Restaurants\",\n                \"privacy_policy\": \"Privacy policy\",\n                \"terms_of_service\": \"Terms of service\",\n                \"download_on_app_store\": \"Download on App Store\",\n                \"download_on_play_store\": \"Download on Play Store\",\n                \"follow_us\": \"Follow us\",\n                \"footer_trademark\": \"© {{ year }} Gojek | Gojek is a trademark of PT Aplikasi Karya Anak Bangsa. Registered in the Directorate General of Intellectual Property of the Republic of Indonesia.\",\n                \"error_general_desc\": \"Let's check back again later or change the location to see what else is good on GoFood.\",\n                \"error_server_title\": \"Oops! Error happened in server\",\n                \"view_resto_cta\": \"Show all restos\",\n                \"show_recommendation_cta\": \"Show more cuisines\",\n                \"show_cuisines_cta\": \"Show more cuisines\",\n                \"show_popular_brand_cta\": \"Show all\",\n                \"home\": \"Home\",\n                \"gofood_pas\": \"GoFood HEMAT\",\n                \"collections\": \"Recommendations\",\n                \"cities_title\": \"Cities with GoFood\",\n                \"cities_cta\": \"Show more cities\",\n                \"cities_cta_show_all\": \"Show all cities\",\n                \"error_not_found_title\": \"We’re not ghosting you. We promise!\",\n                \"error_not_found_desc\": \"We’ve got nothing to show at the moment, but you can try again or search for other locations.\",\n                \"error_rate_limited\": \"Your finger's lightning fast! Wait a few seconds before trying again.\",\n                \"error_unserviceable_title\": \"Aww, we’re not there yet...\",\n                \"error_unserviceable_desc\": \"We'll keep expanding our service areas. For now, you can still search for good foods in other locations.\",\n                \"error_no_location\": \"Can’t find the location. Check the spelling?\",\n                \"download_banner_title\": \"It's like having the entire neighborhood's kitchen in your pocket\",\n                \"download_banner_desc\": \"Enjoy a large variety of meals, deals, and member-only features in GoFood app.\",\n                \"location_picker_bottomsheet_title\": \"Select your location\",\n                \"location_picker_bottomsheet_illustration\": \"Turn on location to get better recommendations in your location\",\n                \"location_picker_placeholder\": \"Enter your location\",\n                \"location_picker_button\": \"Explore\",\n                \"location_picker_title\": \"Your location\",\n                \"location_picker_desc1\": \"Explore good grubs in other cities.\",\n                \"location_picker_desc2\": \"Wanna change location? Explore ahead!\",\n                \"location_picker_desc3\": \"Curious what's in other locations? Change it up.\",\n                \"location_detector\": \"Use your current location\",\n                \"location_picker_suggestions_title\": \"Location suggestions\",\n                \"toaster_turn_on_location\": \"Turn on location to get better recommendations in your location\",\n                \"toaster_error_get_location\": \"Failed to get your location data\",\n                \"toaster_new_account_title\": \"Hooray!\",\n                \"toaster_new_account_subtitle\": \"You can now purchase food with GoFood.\",\n                \"see_other_collections\": \"See other recommendations\",\n                \"discount_off\": \"{{amount}} off\",\n                \"discount_up_to\": \" up to {{amount}}\",\n                \"discount_total\": \"Up to {{amount}} total discount\",\n                \"open\": \"Open\",\n                \"closed\": \"Closed\",\n                \"closing_soon\": \"Closing soon\",\n                \"unavailable\": \"Delivery unavailable\",\n                \"week_1\": \"Monday\",\n                \"week_2\": \"Tuesday\",\n                \"week_3\": \"Wednesday\",\n                \"week_4\": \"Thursday\",\n                \"week_5\": \"Friday\",\n                \"week_6\": \"Saturday\",\n                \"week_7\": \"Sunday\",\n                \"distance\": \"Distance\",\n                \"certified\": \"Certified\",\n                \"new\": \"New\",\n                \"popular_countries\": \"Popular Countries\",\n                \"all_countries\": \"All Countries\",\n                \"login_signup\": \"Log in\",\n                \"logout\": \"Log out\",\n                \"ongoing_orders\": \"Purchases\",\n                \"coachmark_ongoing_orders\": \"Want to track your food? Find your ongoing & past purchases here.\",\n                \"open_app_title\": \"Switch to the app?\",\n                \"open_app_cta\": \"Open app\",\n                \"promo\": \"Delivery promos\",\n                \"promo_subtitle\": \"Pick the promo you want on checkout.\",\n                \"count_promo_available\": \"{{count}} promos are available\",\n                \"promo_eligible\": \"Ready to use\",\n                \"promo_applied\": \"Applied\",\n                \"promo_locked\": \"Check details to unlock this promo\",\n                \"apply_promo_title\": \"Apply promo before you purchase\",\n                \"use_promo\": \"Use\",\n                \"apply_promo\": \"Apply\",\n                \"remove\": \"Remove\",\n                \"my_profile\": \"My Profile\",\n                \"read_more\": \"More details\",\n                \"read_less\": \"Less\",\n                \"view\": \"View\",\n                \"view_all\": \"View all\",\n                \"today_at\": \"Today at\",\n                \"yesterday_at\": \"Yesterday at\",\n                \"tenant_generic_error_title\": \"Oops, something went wrong\",\n                \"tenant_generic_error_desc\": \"Please try closing and reopening GoFood on MoMo to resolve the issue.\",\n                \"tenant_generic_error_cta\": \"Ok, got it\",\n                \"ongoing_order_title\": \"You have an ongoing purchase\",\n                \"ongoing_order_cta\": \"Track\",\n                \"coachmark_pas\": \"Value meals with all-in price incl. delivery fee. No catch.\",\n                \"leave_pas_title\": \"Leaving GoFood HEMAT?\",\n                \"leave_pas_desc\": \"No worries. Find your items in cart when you’re back to HEMAT.\",\n                \"leave_pas_primary_btn\": \"Stay here\",\n                \"leave_pas_secondary_btn\": \"Explore GoFood\"\n            },\n            \"outlet\": {\n                \"price_level_0\": \"Price range\",\n                \"price_level_1\": \"Below 16k\",\n                \"price_level_2\": \"16k-40k\",\n                \"price_level_3\": \"40k-100k\",\n                \"price_level_4\": \"Over 100k\",\n                \"no_outlet\": \"Uh oh, nothing to see here...\",\n                \"no_outlet_desc\": \"We haven’t curated this list. In the meantime, check out other recommendations!\",\n                \"ratings\": \"ratings\",\n                \"review_highlighted\": \"What people say\",\n                \"review_all\": \"All reviews\",\n                \"review_latest_ratings\": \"Freshest ratings\",\n                \"review_user_since\": \"Gojek user since\",\n                \"review_merchant_reply\": \"Reply from\",\n                \"review_ordered_on\": \"Purchased on\",\n                \"button_content_menu\": \"Menu\",\n                \"button_content_reviews\": \"Reviews\",\n                \"button_menu_open\": \"Menu\",\n                \"button_menu_close\": \"Close menu\",\n                \"open_hours\": \"Opening hours\",\n                \"recommended\": \"Recommended\",\n                \"bestseller\": \"Terlaris\",\n                \"resto_rating\": \"Resto rating\",\n                \"empty_review_title\": \"This resto has no reviews yet\",\n                \"see_reviews\": \"See reviews\",\n                \"add_to_cart\": \"Add to cart - {{price}}\",\n                \"update_cart\": \"Update cart - {{price}}\",\n                \"remove_item\": \"Remove item\",\n                \"remove_notes\": \"Remove notes\",\n                \"customize_item\": \"Customize the dish\",\n                \"customize_another\": \"Add another custom item\",\n                \"notes_label\": \"Notes\",\n                \"notes_placeholder\": \"Example: add more, plz...\",\n                \"how_many\": \"How many?\",\n                \"not_customizing\": \"Not customizing.\",\n                \"notes\": \"Notes\",\n                \"edit_notes\": \"Edit notes\",\n                \"edit\": \"Edit\",\n                \"add\": \"Add\",\n                \"customizable\": \"Customizable\",\n                \"out_of_stock\": \"Out of stock\",\n                \"out_of_stock_items\": \"{{count}} out of stock\",\n                \"free\": \"Free\",\n                \"promo\": \"Promo\",\n                \"promo_nudge_ready\": \"You'll save {{number}}\",\n                \"promo_nudge_add_more\": \"Add {{number_add}} more to save {{number_save}}\",\n                \"promo_nudge_saved\": \"You saved {{number}}\",\n                \"qty_items\": {\n                    \"one\": \"{{count}} item\",\n                    \"other\": \"{{count}} items\"\n                },\n                \"required\": \"Required\",\n                \"optional\": \"Optional\",\n                \"required_field_error\": \"Pick how you want to customize\",\n                \"field_hint_select_1\": \"Select 1\",\n                \"field_hint_select_multiple\": \"Select up to {{number}}\",\n                \"field_hint_select_multiple_from\": \"Select {{number_from}} to {{number_to}}\",\n                \"outlet_unavailable\": \"No delivery from this resto & area, yet. Let’s explore other restos.\",\n                \"availability_force_close\": \"Closed • Check again later\",\n                \"availability_close\": \"Closed\",\n                \"availability_open_today\": \"Closed • Opens at {{hour}} today\",\n                \"availability_open_tomorrow\": \"Closed • Opens at {{hour}} tomorrow\",\n                \"availability_open_day\": \"Closed • Opens at {{hour}} {{day_name}}\"\n            },\n            \"meta\": {\n                \"default_title\": \"Taste the top restaurants\",\n                \"default_description\": \"Browse around for good food, pick what you like, and GoFood can deliver it to you.\",\n                \"404_page_title\": \"Oops! Page not found\",\n                \"server_error_page_title\": \"Oops! Error happened in server\",\n                \"unserviceable_page_title\": \"Oops! This location could not be found\",\n                \"landing_page_title\": \"Restaurants in {{location}}\",\n                \"collections_page_title\": \"Restaurants Recommendations\",\n                \"detail_category_page_title\": \"{{category}} Restaurants in {{location}}\",\n                \"detail_brand_page_title\": \"{{brand}} in {{location}}\",\n                \"orders_page_title\": \"Your purchases\",\n                \"order_page_title\": \"Transaction number {{order_number}}\",\n                \"checkout_page_title\": \"Checkout\",\n                \"ecard_page_title\": \"E-Card\"\n            },\n            \"cart\": {\n                \"your-order\": \"Your selected items\",\n                \"customization\": \"Customization\",\n                \"add-more\": \"Add more\",\n                \"total-amount\": \"Total price\",\n                \"checkout\": \"Continue to checkout\",\n                \"checkout_guest\": \"Log in to purchase from resto\",\n                \"empty-cart\": \"Your cart is empty. Let's discover our collections of popular dishes.\",\n                \"items-count_one\": \"{{count}} item\",\n                \"items-count_other\": \"{{count}} items\",\n                \"outlet_delivery\": \"Delivery from {{outletName}}\"\n            },\n            \"error-modal\": {\n                \"total_price_above_limit_title\": \"Whoaa, your cart is overloaded\",\n                \"total_price_above_limit_desc\": \"Thanks for the big purchase, but the maximum food purchase is Rp2.000.000\",\n                \"cart_too_big_primary_btn\": \"Ok, got it\",\n                \"change_merchant_title\": \"Want to purchase from this resto instead?\",\n                \"change_merchant_desc\": \"Sure thing, but we’ll need to clear the items in your current cart from the previous resto first.\",\n                \"change_merchant_primary_btn\": \"Sure, go ahead\",\n                \"change_merchant_secondary_btn\": \"Cancel\",\n                \"driver_cancelled_title\": \"Driver canceled picking up your food.\",\n                \"driver_cancelled_desc\": \"Let’s move on and find you another one. Shall we?\",\n                \"driver_cancelled_primary_btn\": \"Try again\",\n                \"drivers_busy_title\": \"Oh no, our drivers are all busy\",\n                \"drivers_busy_desc\": \"Let’s try again and find a new driver for your purchase from {{ name }}.\",\n                \"drivers_busy_primary_btn\": \"Return to your cart\",\n                \"empty_cart_title\": \"Whooosh, empty cart it is\",\n                \"empty_cart_desc\": \"All items has been removed. Looking for other options? GoFood has many great restos you can try.\",\n                \"empty_cart_primary_btn\": \"Back to resto page\",\n                \"no_internet_connection_title\": \"You seem to be offline\",\n                \"no_internet_connection_desc\": \"Check your Wi-Fi connection or cellular data and try again.\",\n                \"no_internet_connection_primary_btn\": \"Try again\",\n                \"order_cancelled_title\": \"We've canceled your purchase\",\n                \"order_cancelled_desc\": \"Hope we can help you get your meal next time.\",\n                \"order_cancelled_primary_btn\": \"Ok, got it\",\n                \"item_out_of_stock_title\": \"These items are out of stock\",\n                \"item_out_of_stock_desc\": \"Remove these items on your cart to place your purchase:\",\n                \"out_of_stock_primary_btn\": \"Ok, got it\",\n                \"sku_quantity_above_limit_title\": \"Double check your food\",\n                \"sku_quantity_above_limit_desc_one\": \"You can only purchase max. {{ max_count }} {{ name }} with the discount. Please remove some items before continuing.\",\n                \"sku_quantity_above_limit_desc_other\": \"{{ name }} and {{ item_count_left }} other has exceeded the discount limit. Please check the limits and remove the excess items before continuing.\",\n                \"sku_quantity_above_limit_btn\": \"Ok, got it\",\n                \"prevent_order_title\": \"You already have several ongoing purchases\",\n                \"prevent_order_desc\": \"Please wait until one of them is completed, then purchase again like usual.\",\n                \"prevent_order_primary_btn\": \"Ok, got it\",\n                \"prevent_order_secondary_btn\": \"Track my food\",\n                \"total_quantity_above_limit_title\": \"These items are running low\",\n                \"total_quantity_above_limit_desc\": \"Reduce the quantity of the items to place your purchase\",\n                \"qty_limit_primary_btn\": \"Ok, got it\",\n                \"outlet_closed_title\": \"The restaurant just closed 😖\",\n                \"outlet_closed_desc\": \"Your cart will be cleared. Worry not, we found other restos opening at this hour.\",\n                \"resto_closed_primary_btn\": \"Explore other restos\",\n                \"delivery_distance_out_of_limit_title\": \"Whoaa, that restaurant is too far\",\n                \"delivery_distance_out_of_limit_desc\": \"We don’t want your food to get cold. Try purchasing from a restaurant closer to you.\",\n                \"resto_too_far_primary_btn\": \"Explore restos\",\n                \"resto_too_far_secondary_btn\": \"Change location\",\n                \"gofood_plus_too_far_title\": \"Changing delivery locations?\",\n                \"gofood_plus_too_far_desc\": \"Gojek PLUS subscription might not get applied if you change locations.\",\n                \"gofood_plus_too_far_primary_btn\": \"Ok, got it\",\n                \"gofood_plus_too_far_secondary_btn\": \"Cancel\",\n                \"gofood_plus_remove_item_title\": \"Removing items?\",\n                \"gofood_plus_remove_item_desc\": \"Current promo or Gojek PLUS subscription might not be applied if you remove items.\",\n                \"gofood_plus_remove_item_primary_btn\": \"Yes, remove\",\n                \"gofood_plus_remove_item_secondary_btn\": \"Cancel\",\n                \"affordable_offering_not_applicable_title\": \"GoFood HEMAT isn't available at this resto for now\",\n                \"affordable_offering_not_applicable_desc\": \"Would you like to find dishes from other restos? We find something you might like.\",\n                \"affordable_offering_not_applicable_primary_btn\": \"Find other dishes\",\n                \"affordable_offering_no_longer_applicable_title\": \"The time to use GoFood HEMAT here has passed\",\n                \"affordable_offering_no_longer_applicable_desc\": \"Looks like it took too long for you to purchase. Would you like to explore more?\",\n                \"affordable_offering_no_longer_applicable_primary_btn\": \"Find other dishes\",\n                \"affordable_offering_not_applicable_location_changed_title\": \"You just changed your delivery location\",\n                \"affordable_offering_not_applicable_location_changed_desc\": \"To keep using GoFood HEMAT, purchase dishes from nearby restos in your new location.\",\n                \"affordable_offering_not_applicable_location_changed_primary_btn\": \"Find other dishes\"\n            },\n            \"action-modal\": {\n                \"default_primary_btn\": \"Ok, got it\",\n                \"default_secondary_btn\": \"Cancel\",\n                \"order_confirmation_title\": \"Please double check your purchase\",\n                \"order_confirmation_desc\": \"We can’t cancel confirmed purchases at Super Partners. Resto will directly prepare it for faster delivery.\",\n                \"order_confirmation_primary_btn\": \"GoFood now\",\n                \"order_confirmation_secondary_btn\": \"Check again\",\n                \"session_expired_title\": \"You've been logged out\",\n                \"session_expired_desc\": \"Let's log in again to use GoFood. For security, you'll be asked to log in to your account every 24 hours.\",\n                \"session_expired_primary_btn\": \"Log in\",\n                \"session_expired_secondary_btn\": \"Later\",\n                \"tenant_consent_denied_title\": \"Share your info to use GoFood\",\n                \"tenant_consent_denied_desc\": \"Sharing your name, phone number, and email will help drivers contact you easily about your purchases.\",\n                \"tenant_consent_denied_cta\": \"Ok, got it\",\n                \"tenant_location_denied_title\": \"Enable location service\",\n                \"tenant_location_denied_desc\": \"This helps us accurately pinpoint your location so you can get better recommendations.\",\n                \"tenant_location_denied_cta\": \"Ok, got it\",\n                \"ticket_submission_failed_title\": \"Fail to submit your report\",\n                \"ticket_submission_failed_desc\": \"Let's try again while we're fixing this.\",\n                \"ticket_submission_failed_primary_btn\": \"Got it\",\n                \"ticket_submission_success_title\": \"We got your report\",\n                \"ticket_submission_success_desc\": \"We'll respond right away. Check the ticket status on your email or on Gojek app (My Profile > Help & My Tickets).\",\n                \"ticket_submission_success_primary_btn\": \"Got it\"\n            },\n            \"category\": {\n                \"MARTABAK\": \"Martabak\",\n                \"SOTO_BAKSO_SOP\": \"Bakso & soto\",\n                \"ROTI\": \"Bakery\",\n                \"CHINESE\": \"Chinese\",\n                \"BURGER_SANDWICH_STEAK\": \"Western\",\n                \"FASTFOOD\": \"Fast food\",\n                \"JAPANESE\": \"Japanese\",\n                \"SNACKS_JAJANAN\": \"Snacks\",\n                \"SATE\": \"Sate\",\n                \"PIZZA_PASTA\": \"Pizza & pasta\",\n                \"BAKMIE\": \"Noodles\",\n                \"MINUMAN\": \"Beverages\",\n                \"KOREAN\": \"Korean\",\n                \"SEAFOOD\": \"Seafood\",\n                \"COFFEE_SHOP\": \"Coffee\",\n                \"INDIAN_FOOD\": \"Indian\",\n                \"MIDDLE_EASTERN\": \"Middle Eastern\",\n                \"NEAR_ME\": \"Near me\",\n                \"BEST_SELLER\": \"Best sellers\",\n                \"NEW_MERCHANT\": \"New this week\",\n                \"AFFORDABLE_PRICE\": \"Budget meal\",\n                \"MOST_LOVED\": \"Most loved\",\n                \"24_HOURS\": \"24 hours\",\n                \"HEALTHY_FOOD\": \"Healthy food\",\n                \"MKD_MEGAPROMO_ALL\": \"Pasti Ada Promo\",\n                \"BESTSELLERS\": \"Best sellers\",\n                \"BUDGETMEAL\": \"Budget meal\",\n                \"VIETNAMESE_NEW\": \"Vietnamese food\",\n                \"MKT_MART\": \"Daily needs\",\n                \"RICE_AND_STICKY_RICE\": \"All Rice\",\n                \"BOBA_AND_TEA\": \"Boba World\",\n                \"NOODLES\": \"Noodle Paradise\",\n                \"FAST_FOOD\": \"Fast Food\",\n                \"COFFEE\": \"Coffee World\",\n                \"SNACK\": \"Great Snack\",\n                \"JUICE_AND_SMOOTHIES\": \"Fruity Smoothie\",\n                \"VEGETARIAN\": \"Peaceful Vegan\",\n                \"INTERNATIONAL_FOOD\": \"Global Cuisines\",\n                \"VIETNAMESE\": \"Vietnamese\",\n                \"UNDER_THE_SEA\": \"Under The Sea\",\n                \"WINGS_ON_WINGS\": \"Wings On Wings\",\n                \"SWEET_TOOTH\": \"Sweet Tooth\",\n                \"THAI\": \"Thai\",\n                \"BANH_MI\": \"Banh Mi\",\n                \"ITALIAN\": \"Pizza & Pasta\"\n            }\n        }\n    },\n    \"__N_SSP\": true\n}"
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://api.gourmetguide.ai/v1"
+		}
+	]
+}
