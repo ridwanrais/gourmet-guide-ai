@@ -58,7 +58,8 @@ class LocationService {
       return result['formattedAddress'] ?? "Unknown location";
     } catch (e) {
       // Fallback to default value if API call fails
-      return "Jakarta, Indonesia";
+      print('Error: $e');
+      throw Exception('Failed to get address from coordinates: $e');
     }
   }
   

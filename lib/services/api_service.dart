@@ -120,6 +120,7 @@ class ApiService {
           distance: restaurantJson['distance'].toDouble(),
           popularItems: popularItems,
           aiDescription: restaurantJson['aiDescription'],
+          gojekUrl: restaurantJson['gojekUrl'],
         );
       }).toList();
     } else {

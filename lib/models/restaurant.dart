@@ -9,6 +9,7 @@ class Restaurant {
   final double distance;
   final List<FoodItem> popularItems;
   final String? aiDescription;
+  final String? gojekUrl;
 
   Restaurant({
     required this.id,
@@ -21,6 +22,7 @@ class Restaurant {
     required this.distance,
     required this.popularItems,
     this.aiDescription = '',
+    this.gojekUrl,
   });
 }
 

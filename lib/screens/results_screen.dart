@@ -257,22 +257,6 @@ class _ResultsScreenState extends State<ResultsScreen> {
                   ],
                 ).animate().fadeIn(duration: 500.ms, delay: 300.ms).slideY(begin: 0.3, end: 0),
                 const SizedBox(height: 16),
-                ElevatedButton.icon(
-                  onPressed: () {
-                    // In a real app, this would navigate to GoFood order page
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Redirecting to GoFood order page...'),
-                        duration: Duration(seconds: 2),
-                      ),
-                    );
-                  },
-                  icon: const Icon(Icons.shopping_cart),
-                  label: const Text('Order Now'),
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: const Size(double.infinity, 56),
-                  ),
-                ).animate().fadeIn(duration: 500.ms, delay: 500.ms).slideY(begin: 0.3, end: 0),
               ],
             ),
           ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:gofood_ai/models/restaurant.dart';
 import 'package:gofood_ai/utils/theme.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class RestaurantCard extends StatelessWidget {
   final Restaurant restaurant;
@@ -322,6 +323,36 @@ class RestaurantCard extends StatelessWidget {
                       ),
                     );
                   }).toList(),
+                  // Add Order Now button at the bottom
+                  if (restaurant.gojekUrl != null && restaurant.gojekUrl!.isNotEmpty)
+                    Padding(
+                      padding: const EdgeInsets.only(top: 16.0),
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton.icon(
+                          onPressed: () async {
+                            final Uri url = Uri.parse(restaurant.gojekUrl!);
+                            if (await canLaunchUrl(url)) {
+                              await launchUrl(url, mode: LaunchMode.externalApplication);
+                            } else {
+                              // Handle error - unable to launch URL
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Could not open GoFood app'),
+                                ),
+                              );
+                            }
+                          },
+                          icon: const Icon(Icons.shopping_cart),
+                          label: const Text('Order Now on GoFood'),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppTheme.primaryColor,
+                            foregroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(vertical: 12),
+                          ),
+                        ),
+                      ),
+                    ),
                 ],
               ],
             ),
