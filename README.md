@@ -103,6 +103,72 @@ flutter run --dev-tools
 
 The app uses `print` statements for basic logging. For more advanced logging, consider implementing a logging package like `logger`.
 
+## 🛠️ Troubleshooting
+
+### Android Build Issues
+
+#### NDK Configuration Errors
+If you encounter NDK-related errors during Android build, follow these steps:
+
+1. Update the NDK version in `android/app/build.gradle.kts`:
+   ```kotlin
+   android {
+       namespace = "com.example.gofood_ai"
+       compileSdk = 35
+       
+       compileOptions {
+           sourceCompatibility = JavaVersion.VERSION_11
+           targetCompatibility = JavaVersion.VERSION_11
+       }
+
+       kotlinOptions {
+           jvmTarget = JavaVersion.VERSION_11.toString()
+       }
+
+       defaultConfig {
+           applicationId = "com.example.gofood_ai"
+           minSdk = 21
+           targetSdk = 35
+           versionCode = 1
+           versionName = "1.0"
+
+           ndk {
+               abiFilters += listOf("armeabi-v7a", "arm64-v8a", "x86", "x86_64")
+           }
+       }
+   }
+   ```
+
+2. Clean and rebuild the project:
+   ```bash
+   flutter clean
+   flutter pub get
+   flutter run
+   ```
+
+#### Device Connection Issues
+
+1. Ensure USB Debugging is enabled on your Android device:
+   - Go to Settings > About phone
+   - Tap "Build number" 7 times to enable Developer Options
+   - Go to Settings > Developer options
+   - Enable "USB debugging"
+
+2. Connect your device via USB and accept the USB debugging prompt
+
+3. Verify device connection:
+   ```bash
+   adb devices
+   ```
+
+4. If using wireless debugging:
+   - Enable "Wireless debugging" in Developer Options
+   - Use the QR code method or IP address method to pair your device
+   - Run the app with the device ID:
+     ```bash
+     flutter run -d <DEVICE_ID>
+     ```
+     
 ## 🔧 Customization
 
 ### Theme
