@@ -13,6 +13,7 @@ class ApiService {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
+        'ngrok-skip-browser-warning': 'true'
       },
       body: jsonEncode({
         'address': address,
@@ -33,6 +34,7 @@ class ApiService {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
+        'ngrok-skip-browser-warning': 'true'
       },
       body: jsonEncode({
         'latitude': latitude,
@@ -53,6 +55,7 @@ class ApiService {
       Uri.parse('$baseUrl/preferences/suggestions'),
       headers: {
         'Accept': 'application/json',
+        'ngrok-skip-browser-warning': 'true'
       },
     );
 
@@ -90,6 +93,7 @@ class ApiService {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
+        'ngrok-skip-browser-warning': 'true'
       },
       body: jsonEncode(requestBody),
     );
@@ -146,6 +150,7 @@ class ApiService {
       uri,
       headers: {
         'Accept': 'application/json',
+        'ngrok-skip-browser-warning': 'true'
       },
     );
 
