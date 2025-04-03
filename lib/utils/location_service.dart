@@ -1,6 +1,7 @@
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:gofood_ai/services/api_service.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class LocationService {
   // Get current location
@@ -42,46 +43,82 @@ class LocationService {
 
   // Request location permission
   static Future<bool> requestLocationPermission() async {
-    // Request both precise and approximate location permissions
-    Map<Permission, PermissionStatus> statuses = await [
-      Permission.locationWhenInUse,
-      Permission.location,
-    ].request();
-    
-    print('Location permission statuses: $statuses');
-    
-    // Check if any of the location permissions are granted
-    bool isGranted = statuses[Permission.locationWhenInUse]?.isGranted == true || 
-                     statuses[Permission.location]?.isGranted == true;
-    
-    // Also request through Geolocator for better Android compatibility
-    if (isGranted) {
-      var geoStatus = await Geolocator.requestPermission();
-      print('Geolocator permission status: $geoStatus');
+    // For web, use Geolocator directly since permission_handler doesn't support web
+    if (kIsWeb) {
+      try {
+        var permission = await Geolocator.requestPermission();
+        return permission == LocationPermission.always || 
+               permission == LocationPermission.whileInUse;
+      } catch (e) {
+        print('Error requesting location permission on web: $e');
+        return false;
+      }
     }
     
-    return isGranted;
+    // For mobile platforms, use both permission_handler and Geolocator
+    try {
+      // Request both precise and approximate location permissions
+      Map<Permission, PermissionStatus> statuses = await [
+        Permission.locationWhenInUse,
+        Permission.location,
+      ].request();
+      
+      print('Location permission statuses: $statuses');
+      
+      // Check if any of the location permissions are granted
+      bool isGranted = statuses[Permission.locationWhenInUse]?.isGranted == true || 
+                       statuses[Permission.location]?.isGranted == true;
+      
+      // Also request through Geolocator for better Android compatibility
+      if (isGranted) {
+        var geoStatus = await Geolocator.requestPermission();
+        print('Geolocator permission status: $geoStatus');
+      }
+      
+      return isGranted;
+    } catch (e) {
+      print('Error requesting location permission: $e');
+      return false;
+    }
   }
 
   // Check if location permission is granted
   static Future<bool> isLocationPermissionGranted() async {
-    // Check both location permissions
-    PermissionStatus locationStatus = await Permission.location.status;
-    PermissionStatus locationWhenInUseStatus = await Permission.locationWhenInUse.status;
-    
-    print('Location permission status: $locationStatus');
-    print('Location when in use status: $locationWhenInUseStatus');
-    
-    if (locationStatus.isGranted || locationWhenInUseStatus.isGranted) {
-      return true;
+    // For web, use Geolocator directly
+    if (kIsWeb) {
+      try {
+        var permission = await Geolocator.checkPermission();
+        return permission == LocationPermission.always || 
+               permission == LocationPermission.whileInUse;
+      } catch (e) {
+        print('Error checking location permission on web: $e');
+        return false;
+      }
     }
     
-    // Double-check with Geolocator for Android
-    var geoStatus = await Geolocator.checkPermission();
-    print('Geolocator permission status: $geoStatus');
-    
-    return geoStatus == LocationPermission.always || 
-           geoStatus == LocationPermission.whileInUse;
+    // For mobile platforms
+    try {
+      // Check both location permissions
+      PermissionStatus locationStatus = await Permission.location.status;
+      PermissionStatus locationWhenInUseStatus = await Permission.locationWhenInUse.status;
+      
+      print('Location permission status: $locationStatus');
+      print('Location when in use status: $locationWhenInUseStatus');
+      
+      if (locationStatus.isGranted || locationWhenInUseStatus.isGranted) {
+        return true;
+      }
+      
+      // Double-check with Geolocator for Android
+      var geoStatus = await Geolocator.checkPermission();
+      print('Geolocator permission status: $geoStatus');
+      
+      return geoStatus == LocationPermission.always || 
+             geoStatus == LocationPermission.whileInUse;
+    } catch (e) {
+      print('Error checking location permission: $e');
+      return false;
+    }
   }
 
   // Get formatted address from coordinates using API
