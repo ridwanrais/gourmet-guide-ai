@@ -35,20 +35,53 @@ class LocationService {
     try {
       return await Geolocator.getCurrentPosition();
     } catch (e) {
+      print('Error getting current position: $e');
       return null;
     }
   }
 
   // Request location permission
   static Future<bool> requestLocationPermission() async {
-    var status = await Permission.location.request();
-    return status.isGranted;
+    // Request both precise and approximate location permissions
+    Map<Permission, PermissionStatus> statuses = await [
+      Permission.locationWhenInUse,
+      Permission.location,
+    ].request();
+    
+    print('Location permission statuses: $statuses');
+    
+    // Check if any of the location permissions are granted
+    bool isGranted = statuses[Permission.locationWhenInUse]?.isGranted == true || 
+                     statuses[Permission.location]?.isGranted == true;
+    
+    // Also request through Geolocator for better Android compatibility
+    if (isGranted) {
+      var geoStatus = await Geolocator.requestPermission();
+      print('Geolocator permission status: $geoStatus');
+    }
+    
+    return isGranted;
   }
 
   // Check if location permission is granted
   static Future<bool> isLocationPermissionGranted() async {
-    var status = await Permission.location.status;
-    return status.isGranted;
+    // Check both location permissions
+    PermissionStatus locationStatus = await Permission.location.status;
+    PermissionStatus locationWhenInUseStatus = await Permission.locationWhenInUse.status;
+    
+    print('Location permission status: $locationStatus');
+    print('Location when in use status: $locationWhenInUseStatus');
+    
+    if (locationStatus.isGranted || locationWhenInUseStatus.isGranted) {
+      return true;
+    }
+    
+    // Double-check with Geolocator for Android
+    var geoStatus = await Geolocator.checkPermission();
+    print('Geolocator permission status: $geoStatus');
+    
+    return geoStatus == LocationPermission.always || 
+           geoStatus == LocationPermission.whileInUse;
   }
 
   // Get formatted address from coordinates using API
@@ -72,6 +105,7 @@ class LocationService {
         'longitude': result['longitude'],
       };
     } catch (e) {
+      print('Error getting coordinates from address: $e');
       return null;
     }
   }

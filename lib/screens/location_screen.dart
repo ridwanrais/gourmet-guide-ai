@@ -21,22 +21,33 @@ class _LocationScreenState extends State<LocationScreen> {
   @override
   void initState() {
     super.initState();
-    _checkLocationPermission();
+    // Don't automatically check permissions on startup
+    // Just initialize the UI in a clean state
   }
 
   Future<void> _checkLocationPermission() async {
     setState(() {
       _isLoading = true;
+      _errorMessage = null;
     });
 
-    final hasPermission = await LocationService.isLocationPermissionGranted();
-    if (hasPermission) {
-      _getCurrentLocation();
+    try {
+      final hasPermission = await LocationService.isLocationPermissionGranted();
+      if (hasPermission) {
+        _getCurrentLocation();
+      } else {
+        // If permission not granted, we'll request it when the user taps the button
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    } catch (e) {
+      print('Error checking location permission: $e');
+      setState(() {
+        _errorMessage = 'Error checking permissions';
+        _isLoading = false;
+      });
     }
-
-    setState(() {
-      _isLoading = false;
-    });
   }
 
   Future<void> _getCurrentLocation() async {
@@ -72,17 +83,31 @@ class _LocationScreenState extends State<LocationScreen> {
   }
 
   Future<void> _requestLocationPermission() async {
-    final granted = await LocationService.requestLocationPermission();
-    if (granted) {
-      _getCurrentLocation();
-    } else {
+    setState(() {
+      _isLoading = true;
+      _errorMessage = null;
+    });
+    
+    try {
+      final granted = await LocationService.requestLocationPermission();
+      if (granted) {
+        _getCurrentLocation();
+      } else {
+        setState(() {
+          _errorMessage = 'Location permission denied';
+          _isLoading = false;
+        });
+      }
+    } catch (e) {
+      print('Error requesting location permission: $e');
       setState(() {
-        _errorMessage = 'Location permission denied';
+        _errorMessage = 'Error requesting location permission';
+        _isLoading = false;
       });
     }
   }
 
-  void _continueToPreferences() {
+  void _continueToPreferences() async {
     if (_locationController.text.isEmpty) {
       setState(() {
         _errorMessage = 'Please enter a location';
@@ -90,14 +115,42 @@ class _LocationScreenState extends State<LocationScreen> {
       return;
     }
 
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => PreferenceScreen(
-          location: _locationController.text,
+    setState(() {
+      _isLoading = true;
+      _errorMessage = null;
+    });
+
+    try {
+      // Use the geocodeAddress API to validate and get coordinates
+      final coordinates = await LocationService.getCoordinatesFromAddress(_locationController.text);
+      
+      if (coordinates == null) {
+        setState(() {
+          _errorMessage = 'Could not find this location. Please try again.';
+          _isLoading = false;
+        });
+        return;
+      }
+      
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => PreferenceScreen(
+            location: _locationController.text,
+            latitude: coordinates['latitude'],
+            longitude: coordinates['longitude'],
+          ),
         ),
-      ),
-    );
+      );
+    } catch (e) {
+      setState(() {
+        _errorMessage = 'Error processing location: $e';
+      });
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
+    }
   }
 
   @override
@@ -162,7 +215,7 @@ class _LocationScreenState extends State<LocationScreen> {
                         )
                       : IconButton(
                           icon: const Icon(Icons.my_location),
-                          onPressed: _getCurrentLocation,
+                          onPressed: _checkLocationPermission,
                         ),
                 ),
               ).animate().fadeIn(duration: 500.ms, delay: 400.ms).slideY(begin: 0.3, end: 0),

@@ -11,11 +11,15 @@ import 'package:gofood_ai/utils/theme_provider.dart';
 class ResultsScreen extends StatefulWidget {
   final String location;
   final String preference;
+  final double? latitude;
+  final double? longitude;
 
   const ResultsScreen({
     super.key,
     required this.location,
     required this.preference,
+    this.latitude,
+    this.longitude,
   });
 
   @override
@@ -42,9 +46,15 @@ class _ResultsScreenState extends State<ResultsScreen> {
     });
     
     try {
-      // Try to get coordinates from the location string
+      // Use provided coordinates if available, otherwise try to get them from the location string
       Map<String, double>? coordinates;
-      if (widget.location.isNotEmpty) {
+      
+      if (widget.latitude != null && widget.longitude != null) {
+        coordinates = {
+          'latitude': widget.latitude!,
+          'longitude': widget.longitude!,
+        };
+      } else if (widget.location.isNotEmpty) {
         coordinates = await LocationService.getCoordinatesFromAddress(widget.location);
       }
       

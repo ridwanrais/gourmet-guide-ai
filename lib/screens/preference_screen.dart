@@ -8,8 +8,15 @@ import 'package:gofood_ai/utils/theme_provider.dart';
 
 class PreferenceScreen extends StatefulWidget {
   final String location;
+  final double? latitude;
+  final double? longitude;
 
-  const PreferenceScreen({super.key, required this.location});
+  const PreferenceScreen({
+    super.key, 
+    required this.location, 
+    this.latitude, 
+    this.longitude
+  });
 
   @override
   State<PreferenceScreen> createState() => _PreferenceScreenState();
@@ -78,6 +85,8 @@ class _PreferenceScreenState extends State<PreferenceScreen> {
       MaterialPageRoute(
         builder: (context) => ResultsScreen(
           location: widget.location,
+          latitude: widget.latitude,
+          longitude: widget.longitude,
           preference: _preferenceController.text,
         ),
       ),
